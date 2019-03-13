@@ -92,6 +92,9 @@
 		</select>
 		<form:errors path="state" class="error" />
 	</div>
+	<div>
+		<input class="formSubmitButton" type="submit" />
+	</div>
 </form:form>
 
 
