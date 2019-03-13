@@ -24,13 +24,15 @@ public class JDBCWeatherDAO implements WeatherDAO {
 	}
 	
 	@Override
-	public List<Weather> getAllWeather() {
-		String sql="SELECT parkcode, fivedayforcastvalue, low, high, forecast";
-		SqlRowSet results =jdbcTemplate.queryForRowSet(sql);
+	public List<Weather> getAllWeather(String parkcode) {
+		String sql="SELECT * "
+				+ "FROM weather WHERE parkcode = ?;";
+		SqlRowSet results =jdbcTemplate.queryForRowSet(sql, parkcode);
 		
 		List<Weather> newWeather = new ArrayList<Weather>();
-		
+		System.out.println("help");
 		while(results.next()) {
+			System.out.println("chhese");
 			newWeather.add(mapRowToWeather(results));
 		}
 		return newWeather;
@@ -42,15 +44,7 @@ public class JDBCWeatherDAO implements WeatherDAO {
 		int low = row.getInt("low");
 		int high = row.getInt("high");
 		String forecast = row.getString("forecast");
-		
-		Weather newWeatherCast = new Weather();
-		
-		newWeatherCast.setParkCode(parkCode);
-		newWeatherCast.setForecast(forecast);
-		newWeatherCast.setLowTemp(low);
-		newWeatherCast.setHighTemp(high);
-		newWeatherCast.setDay(day);
-		
-		return newWeatherCast;
+		System.out.println(forecast);
+		return new Weather(parkCode, day, low, high, forecast);
 	}
 }

@@ -6,5 +6,5 @@ import com.techelevator.npgeek.Weather;
 
 public interface WeatherDAO {
 	
-	List<Weather> getAllWeather();
+	List<Weather> getAllWeather(String parkcode);
 }

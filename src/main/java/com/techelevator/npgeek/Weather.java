@@ -8,8 +8,22 @@ public class Weather {
 	private int highTemp;
 	private String forecast;
 	private String recommendation;
+	private String forecastImage;
 	
-	public Weather() {
+	public Weather(String parkCode, int day, int lowTemp,int highTemp, String forecast) {
+		this.parkCode = parkCode;
+		this.day = day;
+		this.lowTemp = lowTemp;
+		this.highTemp = highTemp;
+		this.forecast = forecast;
+		switch(forecast) {
+		case "partly cloudy": 
+			forecastImage = "partly_cloudy";
+			break;
+		default:
+			forecastImage = forecast;	
+		}
+		
 		switch(forecast) {
 		case "snow" :
 			recommendation = "Pack Snowshoes!";
@@ -53,38 +67,27 @@ public class Weather {
 	}
 	
 	
+	public String getForecastImage() {
+		return forecastImage;
+	}
+
+
 	public String getRecommendation() {
 		return recommendation;
 	}
 	public String getParkCode() {
 		return parkCode;
 	}
-	public void setParkCode(String parkCode) {
-		this.parkCode = parkCode;
-	}
 	public int getDay() {
 		return day;
-	}
-	public void setDay(int day) {
-		this.day = day;
 	}
 	public int getLowTemp() {
 		return lowTemp;
 	}
-	public void setLowTemp(int lowTemp) {
-		this.lowTemp = lowTemp;
-	}
 	public int getHighTemp() {
 		return highTemp;
-	}
-	public void setHighTemp(int highTemp) {
-		this.highTemp = highTemp;
 	}
 	public String getForecast() {
 		return forecast;
 	}
-	public void setForecast(String forecast) {
-		this.forecast = forecast;
-	}
-
 }

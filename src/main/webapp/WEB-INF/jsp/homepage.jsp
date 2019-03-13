@@ -6,10 +6,11 @@
 <h1>Homepage</h1>
 
 <div id="park">
-<c:url var="detailsURL" value="details" />
+<c:url var="detailsURL" value="/details" />
 	<c:forEach var="park" items="${parks}">
 	
-	<a href="${detailsURL}"><div>
+	<a href="${detailsURL}?parkCode=${park.parkCode}">
+	<div>
 		<img src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />
 		</div>
 		<div>
@@ -17,7 +18,8 @@
 		</div>
 		<div>
 		<p>${park.description}</p>
-		</div></a>
+		</div>
+		</a>
 	</c:forEach>
 </div>
 
