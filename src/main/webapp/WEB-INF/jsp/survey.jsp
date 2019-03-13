@@ -24,7 +24,7 @@
 		<form:errors path="parkCode" class="error" />
 	</div>
 	<div>
-		<select required name="activitylevel">
+		<select required name="activityLevel">
 			<option style="display: none" value="">What is your activity level</option>
 			<option value="inactive">Inactive</option>
 			<option value="sedentary">Sedentary</option>

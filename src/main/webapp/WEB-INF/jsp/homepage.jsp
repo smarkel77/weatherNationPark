@@ -7,9 +7,15 @@
 
 <div id="park">
 	<c:forEach var="park" items="${parks}">
-		<img src="<c:url value="img/${fn:toLowerCase(park.parkCode)}"/>" />
+	<div>
+		<img src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />
+		</div>
+		<div>
 		<h2>${park.parkName} located in ${park.state}</h2>
+		</div>
+		<div>
 		<p>${park.description}</p>
+		</div>
 	</c:forEach>
 </div>
 
