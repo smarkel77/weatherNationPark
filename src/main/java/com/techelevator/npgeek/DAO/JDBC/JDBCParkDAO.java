@@ -28,7 +28,7 @@ public class JDBCParkDAO implements ParkDAO {
 		
 		String sql = "SELECT parkcode, parkname, state, acreage,"
 				+ "elevationinfeet, milesoftrail, numberofcampsites, climate,"
-				+ "yearfounded, annualvistiorcount, quote, quotesource, description,"
+				+ "yearfounded, annualvisitorcount, inspirationalquote, inspirationalquotesource, parkdescription,"
 				+ "entryfee, numberofanimalspecies FROM park";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -49,14 +49,14 @@ public class JDBCParkDAO implements ParkDAO {
 		String state = row.getString("state");
 		int acreage = row.getInt("acreage");
 		int elevationInFeet = row.getInt("elevationinfeet");
-		int milesOfTrail = row.getInt("milesoftail");
+		double milesOfTrail = row.getDouble("milesoftrail");
 		int numberOfCampsites = row.getInt("numberofcampsites");
 		String climate = row.getString("climate");
 		int yearFounded = row.getInt("yearfounded");
 		int annualVisitorCount = row.getInt("annualvisitorcount");
-		String quote = row.getString("quote");
-		String quoteSource = row.getString("quotesource");
-		String description = row.getString("description");
+		String quote = row.getString("inspirationalquote");
+		String quoteSource = row.getString("inspirationalquotesource");
+		String description = row.getString("parkdescription");
 		int entryFee = row.getInt("entryfee");
 		int numOfAnimalSpecies = row.getInt("numberofanimalspecies");
 		
