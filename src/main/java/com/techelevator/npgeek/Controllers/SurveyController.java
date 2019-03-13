@@ -1,7 +1,9 @@
 package com.techelevator.npgeek.Controllers;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -44,8 +46,10 @@ public class SurveyController {
 	}
 	
 	@RequestMapping(path="surveyResults")
-	public String displaySurveyResults() {
-		List<Survey> allSurveys = surveyDAO.getAllSurveyForms();
+	public String displaySurveyResults(ModelMap modelHolder) {
+		Map<Integer, String> surveyResults = new LinkedHashMap();
+		surveyResults = surveyDAO.getSurveyResults();
+		modelHolder.addAttribute("surveyResults", surveyResults);
 		
 		
 		return "surveyResults";

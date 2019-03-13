@@ -3,7 +3,9 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 
 <h1>Survey Results</h1>
-
+<c:forEach var="result" items="${surveyResults}">
+	<p>${result}</p>
+</c:forEach>
 
 
 
