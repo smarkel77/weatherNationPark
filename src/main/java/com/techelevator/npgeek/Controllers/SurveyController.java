@@ -1,7 +1,11 @@
 package com.techelevator.npgeek.Controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.npgeek.Survey;
+import com.techelevator.npgeek.DAO.JDBC.JDBCSurveyDAO;
 
 @Controller
 public class SurveyController {
+	
+	@Autowired
+	JDBCSurveyDAO surveyDAO;
 
 	@RequestMapping(path="/survey", method=RequestMethod.GET)
 	public String displaySurvey(ModelMap modelHolder) {
@@ -31,6 +39,15 @@ public class SurveyController {
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
 			return "redirect:/survey";
 		}
+		surveyDAO.create(survey);
 		return "redirect:surveyResults";
+	}
+	
+	@RequestMapping(path="surveyResults")
+	public String displaySurveyResults() {
+		List<Survey> allSurveys = surveyDAO.getAllSurveyForms();
+		
+		
+		return "surveyResults";
 	}
 }

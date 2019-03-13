@@ -43,7 +43,7 @@ public class JDBCSurveyDAO implements SurveyDAO {
 		String parkCode = row.getString("parkcode");
 		String emailAddress =row.getString("emailaddress");
 		String state = row.getString("state");
-		String activityLevel =row.getNString("activitylevel");
+		String activityLevel =row.getString("activitylevel");
 		
 		Survey newSurvey = new Survey();
 		
@@ -72,10 +72,21 @@ public class JDBCSurveyDAO implements SurveyDAO {
 
 	@Override
 	public void create(Survey newSurveyForm) {
-		String sql ="INSERT INTO survey_result(surveyid, parkcode, emailaddress, state,"
-				+ "activitylevel) VALUES(?,?,?,?,?)";
-		jdbcTemplate.update(sql, newSurveyForm.getSurveyID(), newSurveyForm.getParkCode(),
+		String sql ="INSERT INTO survey_result(parkcode, emailaddress, state, "
+				+ "activitylevel) VALUES(?,?,?,?)";
+		newSurveyForm.setSurveyID(getNextID());
+		jdbcTemplate.update(sql, newSurveyForm.getParkCode(),
 		newSurveyForm.getEmail(), newSurveyForm.getState(), newSurveyForm.getActivityLevel());
 		
+	}
+	
+
+	private long getNextID() {
+		SqlRowSet nextResult = jdbcTemplate.queryForRowSet("SELECT nextval('seq_surveyid')");
+		if(nextResult.next()) {
+			return nextResult.getLong(1);
+		}else {
+			throw new RuntimeException("Something went wrong while getting an id for the new user");
+		}
 	}
 }
