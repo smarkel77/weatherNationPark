@@ -58,13 +58,24 @@ public class JDBCSurveyDAO implements SurveyDAO {
 
 	@Override
 	public List<Survey> getAllSurveyForms() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql ="SELECT surveyid, parkcode, emailaddress, state, "
+				+ "activitylevel  FROM survey_result";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		
+		List<Survey> newSurveyRequest = new ArrayList<Survey>();
+		
+		while(results.next()){
+			newSurveyRequest.add(mapRowToSurvey(results));
+		}
+		return newSurveyRequest;
 	}
 
 	@Override
 	public void create(Survey newSurveyForm) {
-		// TODO Auto-generated method stub
+		String sql ="INSERT INTO survey_result(surveyid, parkcode, emailaddress, state,"
+				+ "activitylevel) VALUES(?,?,?,?,?)";
+		jdbcTemplate.update(sql, newSurveyForm.getSurveyID(), newSurveyForm.getParkCode(),
+		newSurveyForm.getEmail(), newSurveyForm.getState(), newSurveyForm.getActivityLevel());
 		
 	}
 }
