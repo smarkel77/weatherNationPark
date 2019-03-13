@@ -10,7 +10,7 @@
 		src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />
 </div>
 <div>
-	<h2>${park.parkName}located in ${park.state}</h2>
+	<h2>${park.parkName} located in ${park.state}</h2>
 </div>
 <div>
 	<p>${park.description}</p>

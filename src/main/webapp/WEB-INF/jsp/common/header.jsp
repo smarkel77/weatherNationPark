@@ -11,7 +11,7 @@
 <body>
 	<header>
 		<c:url var="logoImgSrc" value="/img/logo.png" />
-		<img src="${logoImgSrc}" alt="National Park Geek">
+		<img id="header-photo" src="${logoImgSrc}" alt="National Park Geek">
 		<p class="motto">Helping you know the weather in your national park </p>
 	</header>
 	<nav>

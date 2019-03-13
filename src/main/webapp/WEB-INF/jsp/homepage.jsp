@@ -16,10 +16,11 @@
 		<div>
 		<h2>${park.parkName} located in ${park.state}</h2>
 		</div>
+		</a>
 		<div>
 		<p>${park.description}</p>
 		</div>
-		</a>
+		
 	</c:forEach>
 </div>
 

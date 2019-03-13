@@ -30,9 +30,7 @@ public class JDBCWeatherDAO implements WeatherDAO {
 		SqlRowSet results =jdbcTemplate.queryForRowSet(sql, parkcode);
 		
 		List<Weather> newWeather = new ArrayList<Weather>();
-		System.out.println("help");
 		while(results.next()) {
-			System.out.println("chhese");
 			newWeather.add(mapRowToWeather(results));
 		}
 		return newWeather;
