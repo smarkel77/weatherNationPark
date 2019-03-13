@@ -1,5 +1,10 @@
 package com.techelevator.npgeek.DAO;
 
-public interface WeatherDAO {
+import java.util.List;
 
+import com.techelevator.npgeek.Weather;
+
+public interface WeatherDAO {
+	
+	List<Weather> getAllWeather();
 }
