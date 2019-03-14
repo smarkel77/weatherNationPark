@@ -59,11 +59,11 @@
 	</div>
 	<div>
 	
-		<p>${day.lowTemp}</p>
+		<p>${day.displayLowTemp}</p>
 
 	</div>
 	<div>
-		<p>${day.highTemp}</p>
+		<p>${day.displayHighTemp}</p>
 	</div>
 	<div>
 		<p>${day.recommendation}</p>

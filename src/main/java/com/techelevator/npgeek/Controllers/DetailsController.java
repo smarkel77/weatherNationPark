@@ -31,8 +31,12 @@ public class DetailsController {
 		List<Weather> parkWeather= weatherDAO.getAllWeather(parkCode);
 		for (Weather w : parkWeather) {
 			if(session.getAttribute("temp").equals("c")) {
-				w.setHighTemp(((w.getHighTemp() - 32) * 5) / 9);
-				w.setLowTemp(((w.getLowTemp() - 32) * 5) / 9);
+				w.setDisplayHighTemp(((w.getHighTemp() - 32) * 5) / 9);
+				w.setDisplayLowTemp(((w.getLowTemp() - 32) * 5) / 9);
+			}
+			if(session.getAttribute("temp").equals("f")) {
+				w.setDisplayHighTemp(w.getHighTemp());
+				w.setDisplayLowTemp(w.getLowTemp());
 			}
 		}
 		modelHandler.addAttribute("parkWeather", parkWeather);
