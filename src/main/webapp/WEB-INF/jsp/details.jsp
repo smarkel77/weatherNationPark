@@ -52,12 +52,15 @@
 	<p>${park.numOfSpecies}</p>
 </div>
 <div>
+
 <c:forEach var="day" items="${parkWeather}">
 	<div>
 		<img src="<c:url value="img/weather/${fn:toLowerCase(day.forecastImage)}.png"/>" />
 	</div>
 	<div>
+	
 		<p>${day.lowTemp}</p>
+
 	</div>
 	<div>
 		<p>${day.highTemp}</p>

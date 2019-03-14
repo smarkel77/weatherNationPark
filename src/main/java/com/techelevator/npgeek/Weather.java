@@ -67,6 +67,16 @@ public class Weather {
 	}
 	
 	
+	public void setLowTemp(int lowTemp) {
+		this.lowTemp = lowTemp;
+	}
+
+
+	public void setHighTemp(int highTemp) {
+		this.highTemp = highTemp;
+	}
+
+
 	public void setRecommendation(String recommendation) {
 		this.recommendation = recommendation;
 	}
