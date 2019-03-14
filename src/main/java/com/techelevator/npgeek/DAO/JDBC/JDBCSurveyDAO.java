@@ -77,7 +77,7 @@ public class JDBCSurveyDAO implements SurveyDAO {
 	public void create(Survey newSurveyForm) {
 		String sql ="INSERT INTO survey_result(parkcode, emailaddress, state, "
 				+ "activitylevel) VALUES(?,?,?,?)";
-		newSurveyForm.setSurveyID(getNextID());
+		newSurveyForm.setSurveyID(getNextID()); 
 		jdbcTemplate.update(sql, newSurveyForm.getParkCode(),
 		newSurveyForm.getEmail(), newSurveyForm.getState(), newSurveyForm.getActivityLevel());
 		

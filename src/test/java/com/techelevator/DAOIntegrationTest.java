@@ -7,6 +7,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import com.techelevator.npgeek.Park;
 import com.techelevator.npgeek.Survey;
 import com.techelevator.npgeek.Weather;
@@ -20,44 +22,44 @@ public abstract class DAOIntegrationTest {
 	private static SingleConnectionDataSource dataSource;
 	
 	//Test Park
-	private static final String TEST_PARK_PARKCODE = "ZZZ";
-	private static final String TEST_PARK_PARKNAME = "Cheese Park";
-	private static final String TEST_PARK_STATE = "Hotdog State";
-	private static final int TEST_PARK_ACREAGE = 999999999;
-	private static final int TEST_PARK_ELEVATION = 888888888;
-	private static final double TEST_PARK_MILESOFTRAIL = 777777777.0;
-	private static final int TEST_PARK_NUMOFCAMPSITES = 666666666;
-	private static final String TEST_PARK_CLIMATE = "Temperate";
-	private static final int TEST_PARK_YEARFOUNDED = 1999;
-	private static final int TEST_PARK_ANNUALVISITORS = 555555555;
-	private static final String TEST_PARK_QUOTE = "They're greeeaaaattt!";
-	private static final String TEST_PARK_QUOTESOURCE = "Tony the Tiger";
-	private static final String TEST_PARK_DESCRIPTION = "Pretty lame";
-	private static final int TEST_PARK_ENTRYFEE = 444444444;
-	private static final int TEST_PARK_NUMOFSPECIES = 333333333;
+	protected static final String TEST_PARK_PARKCODE = "ZZZ";
+	protected static final String TEST_PARK_PARKNAME = "Cheese Park";
+	protected static final String TEST_PARK_STATE = "Hotdog State";
+	protected static final int TEST_PARK_ACREAGE = 999999999;
+	protected static final int TEST_PARK_ELEVATION = 888888888;
+	protected static final double TEST_PARK_MILESOFTRAIL = 777777777.0;
+	protected static final int TEST_PARK_NUMOFCAMPSITES = 666666666;
+	protected static final String TEST_PARK_CLIMATE = "Temperate";
+	protected static final int TEST_PARK_YEARFOUNDED = 1999;
+	protected static final int TEST_PARK_ANNUALVISITORS = 555555555;
+	protected static final String TEST_PARK_QUOTE = "They're greeeaaaattt!";
+	protected static final String TEST_PARK_QUOTESOURCE = "Tony the Tiger";
+	protected static final String TEST_PARK_DESCRIPTION = "Pretty lame";
+	protected static final int TEST_PARK_ENTRYFEE = 444444444;
+	protected static final int TEST_PARK_NUMOFSPECIES = 333333333;
 	
 	//TEST SURVEY
-	private static final long TEST_SURVEY_SURVEYID = 999999;
-	private static final String TEST_SURVEY_PARKCODE = "ZZZ";
-	private static final String TEST_SURVEY_EMAIL = "xxx@MMM.com";
-	private static final String TEST_SURVEY_EMAILCONFIRMATION = "xxx@MMM.com";
-	private static final String TEST_SURVEY_STATE = "Frankfurt Land";
-	private static final String TEST_SURVEY_ACTIVITYLEVEL = "active";
+	protected static final long TEST_SURVEY_SURVEYID = 999999;
+	protected static final String TEST_SURVEY_PARKCODE = "ZZZ";
+	protected static final String TEST_SURVEY_EMAIL = "choutsug@buzzvirale.xyz";
+	protected static final String TEST_SURVEY_EMAILCONFIRMATION = "choutsug@buzzvirale.xyz";
+	protected static final String TEST_SURVEY_STATE = "Frankfurt Land";
+	protected static final String TEST_SURVEY_ACTIVITYLEVEL = "active";
 	
 	//TEST WEATHER
-	private static final String TEST_WEATHER_PARKCODE = "ZZZ";
-	private static final int TEST_WEATHER_DAY = 1;
-	private static final int TEST_WEATHER_LOWTEMP = 20;
-	private static final int TEST_WEATHER_HIGHTTEMP = 80;
-	private static final String TEST_WEATHER_FORECAST = "cloudy";
-	private static final String TEST_WEATHER_RECOMMENDATION = "";
-	private static final String TEST_WEATHER_FORECASTIMAGE = TEST_WEATHER_FORECAST;
+	protected static final String TEST_WEATHER_PARKCODE = "ZZZ";
+	protected static final int TEST_WEATHER_DAY = 1;
+	protected static final int TEST_WEATHER_LOWTEMP = 20;
+	protected static final int TEST_WEATHER_HIGHTTEMP = 80;
+	protected static final String TEST_WEATHER_FORECAST = "cloudy";
+	protected static final String TEST_WEATHER_RECOMMENDATION = "";
+	protected static final String TEST_WEATHER_FORECASTIMAGE = TEST_WEATHER_FORECAST;
 	
 	/* Before any tests are run, this method initializes the datasource for testing. */
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/historygeek");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/npgeek");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("postgres1");
 		/* The following line disables autocommit for connections 
@@ -86,7 +88,7 @@ public abstract class DAOIntegrationTest {
 	}
 	
 	protected Park makeTestPark(String parkCode, String parkName, String state, int acreage, 
-					int elevation, int numOfCampsites, long milesOfTrail, String climate, 
+					int elevation, int numOfCampsites, double milesOfTrail, String climate, 
 					int yearFounded, int annualVisitors, String quote, String quoteSource,
 					String description, int entryFee, int numOfSpecies) {
 		Park testPark = new Park();
@@ -108,28 +110,37 @@ public abstract class DAOIntegrationTest {
 		return testPark;
 	}
 	
-	public void insertPark() {
-		String sql = "INSERT INTO park (parkcode, parkname " + 
-				"state, acreage, elevationinfeet, milesoftrail, numberofcampsites " + 
-				"climate, yearfounded, annualvisitorcount, inspirationalquote " + 
+	public void insertPark(Park park) {
+		String sql = "INSERT INTO park (parkcode, parkname, " + 
+				"state, acreage, elevationinfeet, milesoftrail, numberofcampsites, " + 
+				"climate, yearfounded, annualvisitorcount, inspirationalquote, " + 
 				"inspirationalquotesource, parkdescription, entryfee, numberofanimalspecies) " +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
-		jdbcTemplate.update(sql, TEST_PARK_PARKCODE, TEST_PARK_PARKNAME, TEST_PARK_STATE, 
-				TEST_PARK_ACREAGE, TEST_PARK_ELEVATION, TEST_PARK_MILESOFTRAIL, TEST_PARK_NUMOFCAMPSITES, 
-				TEST_PARK_CLIMATE, TEST_PARK_YEARFOUNDED, TEST_PARK_ANNUALVISITORS, TEST_PARK_QUOTE, 
-				TEST_PARK_QUOTESOURCE, TEST_PARK_DESCRIPTION, TEST_PARK_ENTRYFEE, TEST_PARK_NUMOFSPECIES);
+		jdbcTemplate.update(sql, park.getParkCode(), park.getParkName(), park.getState(), park.getAcreage(), 
+				park.getElevation(), park.getMilesOfTrail(), park.getNumOfCampsites(), park.getClimate(), 
+				park.getYearFounded(), park.getAnnualVisitors(), park.getQuote(), park.getQuoteSource(), 
+				park.getDescription(), park.getEntryFee(), park.getNumOfSpecies());	
 	}
 
-	protected Survey makeTestSurvey() {
+	protected Survey makeTestSurvey(long surveyID, String parkCode, String email, String emailConfirmation, 
+				String state, String activityLevel) {
 		Survey testSurvey = new Survey();
-		testSurvey.setSurveyID(TEST_SURVEY_SURVEYID);
-		testSurvey.setParkCode(TEST_SURVEY_PARKCODE);
-		testSurvey.setEmail(TEST_SURVEY_EMAIL);
-		testSurvey.setEmailConfirmation(TEST_SURVEY_EMAILCONFIRMATION);
-		testSurvey.setState(TEST_PARK_STATE);
-		testSurvey.setActivityLevel(TEST_SURVEY_ACTIVITYLEVEL);
+		testSurvey.setSurveyID(surveyID);
+		testSurvey.setParkCode(parkCode);
+		testSurvey.setEmail(email);
+		testSurvey.setEmailConfirmation(emailConfirmation);
+		testSurvey.setState(state);
+		testSurvey.setActivityLevel(activityLevel);
 		return testSurvey;
+	}
+	
+	public void insertSurvey(Survey survey) {
+		String sql ="INSERT INTO survey_result(surveyid, parkcode, state, emailaddress, "
+				+ "activitylevel) VALUES(?, ?, ?, ?, ?);";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+		jdbcTemplate.update(sql, survey.getSurveyID(), survey.getParkCode(),  
+				survey.getState(), survey.getEmail(), survey.getActivityLevel());
 	}
 	
 	protected Weather makeTestWeather() {
