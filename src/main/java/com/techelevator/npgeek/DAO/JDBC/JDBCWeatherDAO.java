@@ -42,7 +42,6 @@ public class JDBCWeatherDAO implements WeatherDAO {
 		int low = row.getInt("low");
 		int high = row.getInt("high");
 		String forecast = row.getString("forecast");
-		System.out.println(forecast);
 		return new Weather(parkCode, day, low, high, forecast);
 	}
 }

@@ -67,6 +67,16 @@ public class Weather {
 	}
 	
 	
+	public void setRecommendation(String recommendation) {
+		this.recommendation = recommendation;
+	}
+
+
+	public void setForecastImage(String forecastImage) {
+		this.forecastImage = forecastImage;
+	}
+
+
 	public String getForecastImage() {
 		return forecastImage;
 	}
