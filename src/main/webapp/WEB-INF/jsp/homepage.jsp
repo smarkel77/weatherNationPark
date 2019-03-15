@@ -26,7 +26,7 @@
 		<h2>${park.parkName}</h2>
 		
 		<a href="${detailsURL}?parkCode=${park.parkCode}">
-		<img src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />	
+		<img id="park-image" src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />	
 		</a>
 		<div id="info-desc">
 		<p>Located: <span>${park.state}</span>

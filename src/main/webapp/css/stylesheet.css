@@ -37,11 +37,10 @@ li a:hover {
 
 /* Homepage.jsp layout */
 #park-list-div{
-  display:flex;
-  flex-wrap: wrap;
-  
-   margin: 10px;
-   width:200px;
+	margin:5px;
+  border: 1px solid #ccc;
+   margin: 5px;
+   width:300px;
   
 }
 
@@ -49,21 +48,17 @@ li a:hover {
   border: 1px solid #777;
 }
 
-#park-list{
-	flex: 75%;
-	padding: 4px;
+
 	
-}
+
 
 img {
   width: 100%;
   height: auto;
-  margin-top: 8px;
-  vertical-align: middle;
   
 }
 
 #info-desc {
-   margin-top: 8px;
-  vertical-align: middle;
+padding: 15px;
+text-align: center;
 }
