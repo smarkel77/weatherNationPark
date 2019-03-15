@@ -70,7 +70,7 @@ public class JDBCSurveyDAO implements SurveyDAO {
 		
 	}
 	@Override
-	public Map getSurveyResults() {
+	public Map<String, Integer> getSurveyResults() {
 		String sql = "SELECT COUNT(*), park.parkname FROM survey_result " + 
 				"JOIN park ON park.parkCode = survey_result.parkcode " +
 				"GROUP BY park.parkname ORDER BY COUNT DESC, park.parkname;";

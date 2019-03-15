@@ -47,7 +47,7 @@ public class SurveyController {
 	
 	@RequestMapping(path="surveyResults")
 	public String displaySurveyResults(ModelMap modelHolder) {
-		Map<Integer, String> surveyResults = new LinkedHashMap();
+		Map<String, Integer> surveyResults = new LinkedHashMap<String, Integer>();
 		surveyResults = surveyDAO.getSurveyResults();
 		modelHolder.addAttribute("surveyResults", surveyResults);
 		
