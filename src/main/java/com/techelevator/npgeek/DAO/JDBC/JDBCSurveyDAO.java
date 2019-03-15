@@ -47,37 +47,25 @@ public class JDBCSurveyDAO implements SurveyDAO {
 		String emailAddress =row.getString("emailaddress");
 		String state = row.getString("state");
 		String activityLevel =row.getString("activitylevel");
-		
+		System.out.println(emailAddress);
 		Survey newSurvey = new Survey();
 		
 		newSurvey.setSurveyID(surveyId);
 		newSurvey.setParkCode(parkCode);
 		newSurvey.setEmail(emailAddress);
+		newSurvey.setEmailConfirmation(emailAddress);
 		newSurvey.setState(state);
 		newSurvey.setActivityLevel(activityLevel);
 		
 		return newSurvey;
 	}
 
-	@Override
-	public List<Survey> getAllSurveyForms() {
-		String sql ="SELECT surveyid, parkcode, emailaddress, state, "
-				+ "activitylevel  FROM survey_result";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-		
-		List<Survey> newSurveyRequest = new ArrayList<Survey>();
-		
-		while(results.next()){
-			newSurveyRequest.add(mapRowToSurvey(results));
-		}
-		return newSurveyRequest;
-	}
 
 	@Override
 	public void create(Survey newSurveyForm) {
 		String sql ="INSERT INTO survey_result(parkcode, emailaddress, state, "
 				+ "activitylevel) VALUES(?,?,?,?)";
-		newSurveyForm.setSurveyID(getNextID()); 
+		newSurveyForm.setSurveyID(getNextID());  
 		jdbcTemplate.update(sql, newSurveyForm.getParkCode(),
 		newSurveyForm.getEmail(), newSurveyForm.getState(), newSurveyForm.getActivityLevel());
 		
