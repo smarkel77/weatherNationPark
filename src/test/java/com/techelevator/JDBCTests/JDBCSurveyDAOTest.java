@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.JDBCTests;
 
 import java.util.List;
 import java.util.Map;
@@ -48,7 +48,7 @@ public class JDBCSurveyDAOTest extends DAOIntegrationTest {
 	
 	private void assertSurveysAreEqual(Survey expected, Survey actual) {
 		Assert.assertEquals(expected.getParkCode(), actual.getParkCode());
-		//Assert.assertEquals(expected.getSurveyID(), actual.getSurveyID());
+		Assert.assertEquals(expected.getSurveyID(), actual.getSurveyID());
 		Assert.assertEquals(expected.getActivityLevel(), actual.getActivityLevel());
 		Assert.assertEquals(expected.getEmail(), actual.getEmail());
 		Assert.assertEquals(expected.getEmailConfirmation(), actual.getEmailConfirmation());

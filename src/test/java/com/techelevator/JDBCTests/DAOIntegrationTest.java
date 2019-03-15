@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.JDBCTests;
 
 import java.sql.SQLException;
 import javax.sql.DataSource;

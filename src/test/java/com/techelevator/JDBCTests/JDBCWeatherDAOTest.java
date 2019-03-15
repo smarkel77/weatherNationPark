@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.JDBCTests;
 
 import java.util.List;
 
