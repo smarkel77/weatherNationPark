@@ -9,7 +9,29 @@ public class Weather {
 	private String forecast;
 	private String recommendation;
 	private String forecastImage;
+	private int displayHighTemp;
+	private int displayLowTemp;
 	
+	public int getDisplayHighTemp() {
+		return displayHighTemp;
+	}
+
+
+	public void setDisplayHighTemp(int displayHighTemp) {
+		this.displayHighTemp = displayHighTemp;
+	}
+
+
+	public int getDisplayLowTemp() {
+		return displayLowTemp;
+	}
+
+
+	public void setDisplayLowTemp(int displayLowTemp) {
+		this.displayLowTemp = displayLowTemp;
+	}
+
+
 	public Weather(String parkCode, int day, int lowTemp,int highTemp, String forecast) {
 		this.parkCode = parkCode;
 		this.day = day;

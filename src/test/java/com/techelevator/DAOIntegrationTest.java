@@ -123,10 +123,9 @@ public abstract class DAOIntegrationTest {
 				park.getDescription(), park.getEntryFee(), park.getNumOfSpecies());	
 	}
 
-	protected Survey makeTestSurvey(long surveyID, String parkCode, String email, String emailConfirmation, 
+	protected Survey makeTestSurvey(String parkCode, String email, String emailConfirmation, 
 				String state, String activityLevel) {
 		Survey testSurvey = new Survey();
-		testSurvey.setSurveyID(surveyID);
 		testSurvey.setParkCode(parkCode);
 		testSurvey.setEmail(email);
 		testSurvey.setEmailConfirmation(emailConfirmation);
@@ -135,20 +134,21 @@ public abstract class DAOIntegrationTest {
 		return testSurvey;
 	}
 	
-	public void insertSurvey(Survey survey) {
-		String sql ="INSERT INTO survey_result(surveyid, parkcode, state, emailaddress, "
-				+ "activitylevel) VALUES(?, ?, ?, ?, ?);";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
-		jdbcTemplate.update(sql, survey.getSurveyID(), survey.getParkCode(),  
-				survey.getState(), survey.getEmail(), survey.getActivityLevel());
-	}
-	
-	protected Weather makeTestWeather() {
+
+	protected Weather makeTestWeather(String forcastImage, String recommendation) {
 		Weather testWeather = new Weather(TEST_WEATHER_PARKCODE, TEST_WEATHER_DAY,TEST_WEATHER_LOWTEMP,
 				TEST_WEATHER_HIGHTTEMP, TEST_WEATHER_FORECAST);
-		testWeather.setForecastImage(TEST_WEATHER_FORECASTIMAGE);
-		testWeather.setRecommendation(TEST_WEATHER_RECOMMENDATION);
+		testWeather.setForecastImage(forcastImage);
+		testWeather.setRecommendation(recommendation);
 		return testWeather;
+	}
+	
+	public void insertWeather(Weather weather) {
+		String sql = "INSERT INTO weather (parkcode, fivedayforecastvalue, low, high, forecast) " +
+					"VALUES (?, ?, ?, ?, ?);";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+		jdbcTemplate.update(sql, weather.getParkCode(), weather.getDay(), weather.getLowTemp(), weather.getHighTemp(), 
+				weather.getForecast());
 	}
 	
 }

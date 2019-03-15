@@ -18,7 +18,10 @@ public class HomepageController {
 	JDBCParkDAO parkDao;
 	
 	@RequestMapping("/")
-	public String displayHomepage(ModelMap modelHolder) {
+	public String displayHomepage(ModelMap modelHolder, HttpSession session) {
+		if(session.getAttribute("temp") == null) {
+			session.setAttribute("temp", "f");
+		}
 		modelHolder.addAttribute("parks", parkDao.getAllParks()); 
 		return "homepage";
 	}

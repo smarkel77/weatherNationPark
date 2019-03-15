@@ -8,7 +8,6 @@ import com.techelevator.npgeek.Survey;
 public interface SurveyDAO {
 
 	List<Survey> getAllSurveys();
-	List<Survey> getAllSurveyForms();
 	void create(Survey newSurveyForm);
 	Map getSurveyResults();
 }
