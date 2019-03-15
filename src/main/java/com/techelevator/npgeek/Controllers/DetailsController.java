@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.npgeek.Park;
+import com.techelevator.npgeek.Utility;
 import com.techelevator.npgeek.Weather;
 import com.techelevator.npgeek.DAO.JDBC.JDBCParkDAO;
 import com.techelevator.npgeek.DAO.JDBC.JDBCWeatherDAO;
@@ -31,8 +32,8 @@ public class DetailsController {
 		List<Weather> parkWeather= weatherDAO.getAllWeather(parkCode);
 		for (Weather w : parkWeather) {
 			if(session.getAttribute("temp").equals("c")) {
-				w.setDisplayHighTemp(((w.getHighTemp() - 32) * 5) / 9);
-				w.setDisplayLowTemp(((w.getLowTemp() - 32) * 5) / 9);
+				w.setDisplayLowTemp(Utility.convertToCelsius(w.getLowTemp()));
+				w.setDisplayHighTemp(Utility.convertToCelsius(w.getHighTemp()));
 			}
 			if(session.getAttribute("temp").equals("f")) {
 				w.setDisplayHighTemp(w.getHighTemp());
