@@ -3,73 +3,76 @@
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 
-<h1>Details</h1>
+<section class="section">
+	<h1 id="detail-title">${park.parkName}</h1>
 
-<div>
-	<img
-		src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />
-</div>
-<div>
-	<h2>${park.parkName} located in ${park.state}</h2>
-</div>
-<div>
-	<p>${park.description}</p>
-</div>
-<div>
-	<p>${park.acreage}</p>
-</div>
-<div>
-	<p>${park.elevation}</p>
-</div>
-<div>
-	<p>${park.milesOfTrail}</p>
-</div>
-<div>
-	<p>${park.numOfCampsites}</p>
-</div>
-<div>
-	<p>${park.climate}</p>
-</div>
-<div>
-	<p>${park.yearFounded}</p>
-</div>
-<div>
-	<p>${park.annualVisitors}</p>
-</div>
-<div>
-	<p>${park.quote}</p>
-</div>
-<div>
-	<p>${park.quoteSource}</p>
-</div>
-<div>
-	<p>${park.description}</p>
-</div>
-<div>
-	<p>${park.entryFee}</p>
-</div>
-<div>
-	<p>${park.numOfSpecies}</p>
-</div>
-<div>
+	<div class="detail-pic-and-quote">
+		<div class="park-image-detail">
+			<img
+				src="<c:url value="img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>" />
+		</div>
 
-<c:forEach var="day" items="${parkWeather}">
-	<div>
-		<img src="<c:url value="img/weather/${fn:toLowerCase(day.forecastImage)}.png"/>" />
+		<p id="inspirational-quote">
+			<c:out value="${park.quote}" />
+		</p>
+
+		<p id="inspirational-quote-source">
+			-
+			<c:out value="${park.quoteSource}" />
+		</p>
+
+
+
 	</div>
-	<div>
+	<div class="park-detail-description">
+
+		<p id="park-text">
+			Founded in <span id="year-founded">${park.yearFounded}</span>, <span
+				id="park-name">${park.parkName}</span> is located in the state of <span
+				id="park-state">${park.state}</span> and has <span
+				id="mile-of-trail">${park.milesOfTrail}</span> miles of trails
+			spread out in its <span id="park-acreage">${park.acreage}</span>
+			acres of natural landscapes. With a typical <span id="park-climate">
+				${park.climate}</span> climate and an elevation of <span
+				id="park-elevation">${park.elevation}</span> feet, <span
+				id="number-of-animals">${park.numOfSpecies}</span> different species
+			of animals can be spotted in the park. This park attracts around <span
+				id="annual-visitors">${park.annualVisitors}</span> visitors every
+			year, who can choose from <span id="number-of-campsites">${park.numOfCampsites}</span>
+			different camp sites.
+		</p>
+		
+
+		<div id="entry-fee">
+			<c:if test="${park.entryFee == 0}">
+				<c:out value="Entry is free!" />
+			</c:if>
+			<c:if test="${park.entryFee > 0}">
+				<c:out value="Entry fee: $${park.entryFee}/person" />
+			</c:if>
+		</div>
+
+	</div>
 	
-		<p>${day.lowTemp}</p>
+	
+	
+	
+	<div class="five-day-forecast">
+		<c:forEach var="day" items="${parkWeather}">
+			<div>
+				<img
+					src="<c:url value="img/weather/${fn:toLowerCase(day.forecastImage)}.png"/>" />
+			</div>
+			<div id="Temps-Recommendations">
+				<p>Low Temperature of ${day.lowTemp}</p>
 
+				<p>High Temperature of ${day.highTemp}</p>
+			
+				
+				<p>Recommendations: <br/><span>${day.recommendation} </span></p>
+			</div>
+		</c:forEach>
 	</div>
-	<div>
-		<p>${day.highTemp}</p>
-	</div>
-	<div>
-		<p>${day.recommendation}</p>
-	</div>
-</c:forEach>
-</div>
+</section>
 
-
-	<c:import url="/WEB-INF/jsp/common/footer.jsp" />
+<c:import url="/WEB-INF/jsp/common/footer.jsp" />

@@ -14,13 +14,15 @@
 		<img id="header-photo" src="${logoImgSrc}" alt="National Park Geek">
 		<p class="motto">Helping you know the weather in your national park </p>
 	</header>
-	<nav>
+	<nav class="topnav">
 		<ul>
+		
 			<c:url var="homePageHref" value="/" />
 			<c:url var="surveyHref" value="/survey" />
 			
-			<li><a href="${homePageHref}">Home</a></li>
-			<li><a href="${surveyHref}">Take our survey</a></li>
+		<li><a href="${homePageHref}">Home</a></li>
+		<li><a href="${surveyHref}">Take our survey</a></li>
+		
 		</ul>
 	</nav>
 	<div id="container" class="wrapper">
