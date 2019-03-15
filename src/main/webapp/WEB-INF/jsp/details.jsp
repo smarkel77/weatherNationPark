@@ -53,25 +53,25 @@
 			</c:if>
 		</div>
 
-=======
+
 <c:forEach var="day" items="${parkWeather}">
 	<div>
 		<img src="<c:url value="img/weather/${fn:toLowerCase(day.forecastImage)}.png"/>" />
 	</div>
 	<div>
 	
-		<p>${day.displayLowTemp}</p>
+		<p>Low Temperature is <span>${day.displayLowTemp}</span></p>
 
 	</div>
 	<div>
-		<p>${day.displayHighTemp}</p>
+		<p>High Temperature is <span>${day.displayHighTemp}</span></p>
 	</div>
 	<div>
-		<p>${day.recommendation}</p>
->>>>>>> 941582852ce4be58e87e0e1e6dbab0ef874b022d
+		<p>Recommendation: <br/> <span>${day.recommendation}</span></p>
+
 	</div>
 	
-	
+	</c:forEach>
 	
 	
 	<div class="five-day-forecast">
