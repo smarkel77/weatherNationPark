@@ -1,5 +1,6 @@
 package com.techelevator.npgeek.Controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.npgeek.Park;
+import com.techelevator.npgeek.ShortWeather;
 import com.techelevator.npgeek.Weather;
 import com.techelevator.npgeek.DAO.ParkDAO;
 import com.techelevator.npgeek.DAO.WeatherDAO;
@@ -25,18 +27,17 @@ public class RestApiController {
 	WeatherDAO weatherDao;
 	
 	@RequestMapping("/parks")
-	public Map getParksAsJson() {
-		Map<String, Object> json = new HashMap<String, Object>();
-		List<Park> parks = parkDao.getAllParks();
-		json.put("parks", parks);
-		return json;
+	public List getParksAsJson() {
+		return parkDao.getAllParks();
 	}
 	
 	@RequestMapping("/weather")
-	public Map getParkWeather(@RequestParam String parkCode) {
-		Map<String, Object> json = new HashMap<String, Object>();
+	public List getParkWeather(@RequestParam String parkCode) {
 		List<Weather> weather = weatherDao.getAllWeather(parkCode);
-		json.put("weather", weather);
-		return json;
+		List<ShortWeather> shortWeather = new ArrayList<ShortWeather>();
+		for (Weather each : weather) {
+			shortWeather.add(new ShortWeather(each));
+		}
+		return shortWeather;
 	}
 }
