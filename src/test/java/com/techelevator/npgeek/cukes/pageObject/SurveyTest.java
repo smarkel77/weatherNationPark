@@ -26,7 +26,7 @@ public class SurveyTest {
 	}
 	
 	public SurveyTest enterFavoritePark(String park) {
-		Select parkField = new Select(webDriver.findElement(By.name("parkCode")));
+		Select parkField = new Select(webDriver.findElement(By.xpath("//*[@id=\"survey\"]/div[1]/select/option[1]")));
 		parkField.selectByVisibleText(park);
 		return this;
 	}
