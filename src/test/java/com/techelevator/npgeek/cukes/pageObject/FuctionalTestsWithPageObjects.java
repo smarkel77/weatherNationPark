@@ -3,6 +3,7 @@ package com.techelevator.npgeek.cukes.pageObject;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +13,7 @@ public class FuctionalTestsWithPageObjects {
 	private static WebDriver webDriver;
 	private HomepageTest homepageTest;
 	
+	@BeforeClass
 	public static void openWebBrowserForTesting() {
 		
 		String homeDir = System.getProperty("user.home");
